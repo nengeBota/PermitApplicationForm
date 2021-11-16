@@ -1,0 +1,795 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>interface test</title>
+    <script
+      src="https://kit.fontawesome.com/fee4c24b54.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="api.js"></script>
+    <link rel="stylesheet" href="interface.css" />
+    <script>
+      function showlist(num) {
+        // if the currently clicked checkbox is active,
+        // deactivate the other checkbox
+        // show the current list
+        // hide the other list
+        //else hide the current list
+
+        let currentSection = null;
+        let currentCheckbox = null;
+        let otherSection = null;
+        let otherCheckbox = null;
+
+        if (num === 1) {
+          currentSection = document.getElementById("special-list");
+          currentCheckbox = document.getElementById("special");
+          otherSection = document.getElementById("gen-list");
+          otherCheckbox = document.getElementById("gen");
+        } else if (num === 2) {
+          currentSection = document.getElementById("gen-list");
+          currentCheckbox = document.getElementById("gen");
+          otherSection = document.getElementById("special-list");
+          otherCheckbox = document.getElementById("special");
+        }
+
+        if (currentCheckbox.checked) {
+          otherCheckbox.checked = false;
+          currentSection.style.display = "block";
+          otherSection.style.display = "none";
+        } else {
+          currentSection.style.display = "none";
+        }
+      }
+
+      function addrows(tableName) {
+        let table_body = document.getElementById(tableName);
+        let rows = table_body.insertRow(-1);
+        let i = 0;
+        for (i = 0; i < 4; i++) {
+          let cells = rows.insertCell(i);
+          let input = document.createElement("input");
+          cells.appendChild(input);
+        }
+        // create a cell that#ll be at the end of the hrow. store this cell in a var.
+        // create the delete text that#ll be placed within this new cell
+        // append this delete text that#ll be placed within the cell
+
+        let delCell = rows.insertCell(i);
+        let delText = document.createTextNode("Delete");
+        delCell.appendChild(delText);
+        delCell.onclick = function (e) {
+          delrows(e, tableName);
+        };
+
+        // the new way , ie. the arrow function: e => delrows(e)
+      }
+
+      function delrows(e, tableName) {
+        const rowIndex = e.target.parentElement.rowIndex;
+        let table_body = document.getElementById(tableName);
+        table_body.deleteRow(rowIndex - 1);
+        //console.log("clicked row index ", rowIndex);
+      }
+    </script>
+  </head>
+
+  <body>
+    <main class="container">
+      <nav class="navbar">
+        <ul>
+          <li class="nav-list">
+            <span class="numbers"> 1 </span>part one :
+            <ul>
+              <li class="nav-list-index">corporate structure & services</li>
+            </ul>
+          </li>
+          <li class="nav-list">
+            <span class="numbers"> 2 </span>part two :
+            <ul>
+              <li class="nav-list-index">
+                financial capability & technical competence
+              </li>
+            </ul>
+          </li>
+          <li class="nav-list">
+            <span class="numbers"> 3 </span>part three :
+            <ul>
+              <li class="nav-list-index">plans & programmes</li>
+            </ul>
+          </li>
+          <li class="nav-list">
+            <span class="numbers"> 4 </span>part four :
+            <ul>
+              <li class="nav-list-index">local content</li>
+            </ul>
+          </li>
+          <li class="nav-list">
+            <span class="numbers"> 5 </span>part five :
+            <ul>
+              <li class="nav-list-index">
+                health, safety, security & environment
+              </li>
+            </ul>
+          </li>
+          <li class="nav-list">
+            <span class="numbers"> 6 </span>part six :
+            <ul>
+              <li class="nav-list-index">miscellaneous</li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <header>
+        <img
+          src="./images/logo.png"
+          alt="Petroleum Commission Logo"
+          class="img-logo"
+        />
+      </header>
+      <!--end of sidebar & header-->
+
+      <form
+        method="post"
+        class="content"
+        onsubmit="return submitPermitApplicationForm( )"
+      >
+        <div>
+          <label for="name" class="label-name"
+            >(i) Name of Applicant<i class="fas fa-asterisk fa-xs"></i
+          ></label>
+          <span class="notification"
+            ><i class="fas fa-info-circle"></i> As indicated on Certificate of
+            Incorporation</span
+          >
+          <input
+            type="text"
+            name="applicant-name"
+            id="applicant-name"
+            class="inputs"
+            placeholder="Company Name"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="name" class="label-name"
+            >(ii) Date of Incorporation<i class="fas fa-asterisk fa-xs"></i
+          ></label>
+          <input type="date" id="date_incorporation" class="inputs" required />
+        </div>
+
+        <div>
+          <label for="name" class="label-name"
+            >(iii) Place of Incorporation<i class="fas fa-asterisk fa-xs"></i
+          ></label>
+          <input
+            type="text"
+            id="place_incorporation"
+            class="inputs"
+            required
+            autocomplete="address-level1"
+          />
+        </div>
+
+        <div>
+          <label for="Contact" class="label-name">(iv) Contact Details</label>
+          <input
+            type="text"
+            id="street"
+            placeholder="* street address"
+            class="inputs"
+            required
+            autocomplete="street-address"
+          />
+          <input
+            type="text"
+            id="postal"
+            placeholder="* postal address"
+            class="inputs"
+            required
+          />
+          <input
+            type="email"
+            id="email"
+            placeholder="* email"
+            class="inputs"
+            autocomplete="email"
+            required
+          />
+          <input
+            type="url"
+            id="website"
+            placeholder="https://mywebsite.com"
+            class="inputs"
+            autocomplete="url"
+          />
+          <input
+            type="text"
+            id="Cperson"
+            placeholder="* Contact Person"
+            class="inputs"
+            autocomplete="name"
+            required
+          />
+          <input
+            type="tel"
+            id="phone"
+            placeholder="* +233xx-xxx-xxxx"
+            class="inputs"
+            autocomplete="tel"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="name" class="label-name"
+            >(v) Name of Subsidiary or Affiliate<i
+              class="fas fa-asterisk fa-xs"
+            ></i
+          ></label>
+          <span class="notification"
+            ><i class="fas fa-info-circle"></i> Input "none" if you do not have
+            Affiliate</span
+          >
+          <input type="text" id="name" class="inputs" required />
+        </div>
+
+        <div>
+          <label for="country" class="label-name"
+            >(vi) Nationality of Parent Company or Affiliate<i
+              class="fas fa-asterisk fa-xs"
+            ></i
+          ></label>
+          <input
+            id="country"
+            name="country"
+            list="countries"
+            class="inputs"
+            required
+          />
+          <datalist id="countries">
+            <option value="Not Applicable"></option>
+            <option value="Afghanistan"></option>
+            <option value="Albania"></option>
+            <option value="Algeria"></option>
+            <option value="American Samoa"></option>
+            <option value="Andorra"></option>
+            <option value="Angola"></option>
+            <option value="Anguilla"></option>
+            <option value="Antarctica"></option>
+            <option value="Antigua and Barbuda"></option>
+            <option value="Argentina"></option>
+            <option value="Armenia"></option>
+            <option value="Aruba"></option>
+            <option value="Australia"></option>
+            <option value="Austria"></option>
+            <option value="Azerbaijan"></option>
+            <option value="Bahamas"></option>
+            <option value="Bahrain"></option>
+            <option value="Bangladesh"></option>
+            <option value="Barbados"></option>
+            <option value="Belarus"></option>
+            <option value="Belgium"></option>
+            <option value="Belize"></option>
+            <option value="Benin"></option>
+            <option value="Bermuda"></option>
+            <option value="Bhutan"></option>
+            <option value="Bolivia"></option>
+            <option value="Bosnia and Herzegovina"></option>
+            <option value="Botswana"></option>
+            <option value="Bouvet Island"></option>
+            <option value="Brazil"></option>
+            <option value="British Indian Ocean Territory"></option>
+            <option value="Brunei Darussalam"></option>
+            <option value="Bulgaria"></option>
+            <option value="Burkina Faso"></option>
+            <option value="Burundi"></option>
+            <option value="Cambodia"></option>
+            <option value="Cameroon"></option>
+            <option value="Canada"></option>
+            <option value="Cape Verde"></option>
+            <option value="Cayman Islands"></option>
+            <option value="Central African Republic"></option>
+            <option value="Chad"></option>
+            <option value="Chile"></option>
+            <option value="China"></option>
+            <option value="Christmas Island"></option>
+            <option value="Cocos (Keeling) Islands"></option>
+            <option value="Colombia"></option>
+            <option value="Comoros"></option>
+            <option value="Congo"></option>
+            <option value="Congo, The Democratic Republic of The"></option>
+            <option value="Cook Islands"></option>
+            <option value="Costa Rica"></option>
+            <option value="Cote D'ivoire"></option>
+            <option value="Croatia"></option>
+            <option value="Cuba"></option>
+            <option value="Cyprus"></option>
+            <option value="Czech Republic"></option>
+            <option value="Denmark"></option>
+            <option value="Djibouti"></option>
+            <option value="Dominica"></option>
+            <option value="Dominican Republic"></option>
+            <option value="Ecuador"></option>
+            <option value="Egypt"></option>
+            <option value="El Salvador"></option>
+            <option value="Equatorial Guinea"></option>
+            <option value="Eritrea"></option>
+            <option value="Estonia"></option>
+            <option value="Ethiopia"></option>
+            <option value="Falkland Islands (Malvinas)"></option>
+            <option value="Faroe Islands"></option>
+            <option value="Fiji"></option>
+            <option value="Finland"></option>
+            <option value="France"></option>
+            <option value="French Guiana"></option>
+            <option value="French Polynesia"></option>
+            <option value="French Southern Territories"></option>
+            <option value="Gabon"></option>
+            <option value="Gambia"></option>
+            <option value="Georgia"></option>
+            <option value="Germany"></option>
+            <option value="Ghana"></option>
+            <option value="Gibraltar"></option>
+            <option value="Greece"></option>
+            <option value="Greenland"></option>
+            <option value="Grenada"></option>
+            <option value="Guadeloupe"></option>
+            <option value="Guam"></option>
+            <option value="Guatemala"></option>
+            <option value="Guinea"></option>
+            <option value="Guinea-bissau"></option>
+            <option value="Guyana"></option>
+            <option value="Haiti"></option>
+            <option value="Heard Island and Mcdonald Islands"></option>
+            <option value="Holy See (Vatican City State)"></option>
+            <option value="Honduras"></option>
+            <option value="Hong Kong"></option>
+            <option value="Hungary"></option>
+            <option value="Iceland"></option>
+            <option value="India"></option>
+            <option value="Indonesia"></option>
+            <option value="Iran, Islamic Republic of"></option>
+            <option value="Iraq"></option>
+            <option value="Ireland"></option>
+            <option value="Israel"></option>
+            <option value="Italy"></option>
+            <option value="Jamaica"></option>
+            <option value="Japan"></option>
+            <option value="Jordan"></option>
+            <option value="Kazakhstan"></option>
+            <option value="Kenya"></option>
+            <option value="Kiribati"></option>
+            <option value="Korea, Democratic People's Republic of"></option>
+            <option value="Korea, Republic of"></option>
+            <option value="Kuwait"></option>
+            <option value="Kyrgyzstan"></option>
+            <option value="Lao People's Democratic Republic"></option>
+            <option value="Latvia"></option>
+            <option value="Lebanon"></option>
+            <option value="Lesotho"></option>
+            <option value="Liberia"></option>
+            <option value="Libyan Arab Jamahiriya"></option>
+            <option value="Liechtenstein"></option>
+            <option value="Lithuania"></option>
+            <option value="Luxembourg"></option>
+            <option value="Macao"></option>
+            <option value="Macedonia, The Former Yugoslav Republic of"></option>
+            <option value="Madagascar"></option>
+            <option value="Malawi"></option>
+            <option value="Malaysia"></option>
+            <option value="Maldives"></option>
+            <option value="Mali"></option>
+            <option value="Malta"></option>
+            <option value="Marshall Islands"></option>
+            <option value="Martinique"></option>
+            <option value="Mauritania"></option>
+            <option value="Mauritius"></option>
+            <option value="Mayotte"></option>
+            <option value="Mexico"></option>
+            <option value="Micronesia, Federated States of"></option>
+            <option value="Moldova, Republic of"></option>
+            <option value="Monaco"></option>
+            <option value="Mongolia"></option>
+            <option value="Montserrat"></option>
+            <option value="Morocco"></option>
+            <option value="Mozambique"></option>
+            <option value="Myanmar"></option>
+            <option value="Namibia"></option>
+            <option value="Nauru"></option>
+            <option value="Nepal"></option>
+            <option value="Netherlands"></option>
+            <option value="Netherlands Antilles"></option>
+            <option value="New Caledonia"></option>
+            <option value="New Zealand"></option>
+            <option value="Nicaragua"></option>
+            <option value="Niger"></option>
+            <option value="Nigeria"></option>
+            <option value="Niue"></option>
+            <option value="Norfolk Island"></option>
+            <option value="Northern Mariana Islands"></option>
+            <option value="Norway"></option>
+            <option value="Oman"></option>
+            <option value="Pakistan"></option>
+            <option value="Palau"></option>
+            <option value="Palestinian Territory, Occupied"></option>
+            <option value="Panama"></option>
+            <option value="Papua New Guinea"></option>
+            <option value="Paraguay"></option>
+            <option value="Peru"></option>
+            <option value="Philippines"></option>
+            <option value="Pitcairn"></option>
+            <option value="Poland"></option>
+            <option value="Portugal"></option>
+            <option value="Puerto Rico"></option>
+            <option value="Qatar"></option>
+            <option value="Reunion"></option>
+            <option value="Romania"></option>
+            <option value="Russian Federation"></option>
+            <option value="Rwanda"></option>
+            <option value="Saint Helena"></option>
+            <option value="Saint Kitts and Nevis"></option>
+            <option value="Saint Lucia"></option>
+            <option value="Saint Pierre and Miquelon"></option>
+            <option value="Saint Vincent and The Grenadines"></option>
+            <option value="Samoa"></option>
+            <option value="San Marino"></option>
+            <option value="Sao Tome and Principe"></option>
+            <option value="Saudi Arabia"></option>
+            <option value="Senegal"></option>
+            <option value="Serbia and Montenegro"></option>
+            <option value="Seychelles"></option>
+            <option value="Sierra Leone"></option>
+            <option value="Singapore"></option>
+            <option value="Slovakia"></option>
+            <option value="Slovenia"></option>
+            <option value="Solomon Islands"></option>
+            <option value="Somalia"></option>
+            <option value="South Africa"></option>
+            <option
+              value="South Georgia and The South Sandwich Islands"
+            ></option>
+            <option value="Spain"></option>
+            <option value="Sri Lanka"></option>
+            <option value="Sudan"></option>
+            <option value="Suriname"></option>
+            <option value="Svalbard and Jan Mayen"></option>
+            <option value="Swaziland"></option>
+            <option value="Sweden"></option>
+            <option value="Switzerland"></option>
+            <option value="Syrian Arab Republic"></option>
+            <option value="Taiwan, Province of China"></option>
+            <option value="Tajikistan"></option>
+            <option value="Tanzania, United Republic of"></option>
+            <option value="Thailand"></option>
+            <option value="Timor-leste"></option>
+            <option value="Togo"></option>
+            <option value="Tokelau"></option>
+            <option value="Tonga"></option>
+            <option value="Trinidad and Tobago"></option>
+            <option value="Tunisia"></option>
+            <option value="Turkey"></option>
+            <option value="Turkmenistan"></option>
+            <option value="Turks and Caicos Islands"></option>
+            <option value="Tuvalu"></option>
+            <option value="Uganda"></option>
+            <option value="Ukraine"></option>
+            <option value="United Arab Emirates"></option>
+            <option value="United Kingdom"></option>
+            <option value="United States"></option>
+            <option value="United States Minor Outlying Islands"></option>
+            <option value="Uruguay"></option>
+            <option value="Uzbekistan"></option>
+            <option value="Vanuatu"></option>
+            <option value="Venezuela"></option>
+            <option value="Viet Nam"></option>
+            <option value="Virgin Islands, British"></option>
+            <option value="Virgin Islands, U.S"></option>
+            <option value="Wallis and Futuna"></option>
+            <option value="Western Sahara"></option>
+            <option value="Yemen"></option>
+            <option value="Zambia"></option>
+            <option value="Zimbabwe"></option>
+          </datalist>
+        </div>
+
+        <div>
+          <label for="corporate_structure" class="label-name"
+            >(vii) Provide an outline of the corporate structure
+          </label>
+          <span class="notification"
+            ><i class="fas fa-clipboard-list"></i> Include an explanatory
+            diagram, if appropriate, showing parent, subsidiary and affiliate
+            companies</span
+          >
+          <input
+            type="file"
+            name="corporate_structure"
+            id="submit-file"
+            class="inputs"
+          />
+        </div>
+
+        <table class="tables">
+          <caption>
+            (viii) LIST OF INDIVIDUALS/ COMPANIES WITH SHARES IN THE APPLICANT
+            COMPANY
+            <i class="fas fa-asterisk fa-xs"></i>
+          </caption>
+          <tr>
+            <th>Name of Shareholder</th>
+            <th>Address</th>
+            <th>Nationality</th>
+            <th>Percentage share in company</th>
+            <th>
+              <button
+                onClick="addrows('table_1')"
+                type="button"
+                class="add_button"
+              >
+                Add
+              </button>
+            </th>
+          </tr>
+          <tbody id="table_1"></tbody>
+        </table>
+
+        <table class="tables">
+          <caption>
+            (ix) BENEFICIAL OWNERSHIP: IF SHAREHOLDERS ABOVE ARE COMPANIES, LIST
+            ALL THE ACTUAL BENEFICIAL OWNERS<i
+              class="fas fa-asterisk fa-xs"
+            ></i>
+          </caption>
+          <tr>
+            <th>Name of Shareholder</th>
+            <th>Address</th>
+            <th>Nationality</th>
+            <th>Percentage share in company</th>
+            <th>
+              <button
+                onClick="addrows('table_2')"
+                type="button"
+                class="add_button"
+              >
+                Add
+              </button>
+            </th>
+          </tr>
+          <tbody id="table_2"></tbody>
+        </table>
+
+        <table class="tables">
+          <caption>
+            (x) LIST EXECUTIVE DIRECTORS & SENIOR MANAGEMENT TEAM OF THE COMPANY
+            <i class="fas fa-asterisk fa-xs"></i>
+          </caption>
+          <tr>
+            <th>Name</th>
+            <th>Occupation</th>
+            <th>Nationality</th>
+            <th>Position in company</th>
+            <th>
+              <button
+                onClick="addrows('table_3')"
+                type="button"
+                class="add_button"
+              >
+                Add
+              </button>
+            </th>
+          </tr>
+          <tbody id="table_3"></tbody>
+        </table>
+
+        <div class="category">
+          <div class="cat_main">
+            <h2><i class="fas fa-asterisk fa-xs"></i>(xi) Permit Category:</h2>
+          </div>
+
+          <div class="cat_1">
+            <input
+              type="checkbox"
+              id="special"
+              name="permit_cat"
+              class="category_box"
+              onclick="showlist(1)"
+            /><label for="specialized" class="label_cat"> Specialized</label>
+          </div>
+
+          <div class="cat_2">
+            <input
+              type="checkbox"
+              id="gen"
+              name="permit_cat"
+              class="category_box"
+              onclick="showlist(2)"
+            />
+            <label for="General" class="label_cat">General </label>
+          </div>
+        </div>
+
+        <fieldset id="special-list" class="hidden">
+          <legend>
+            please Indicate <em>exactly </em>two activities from the
+            Classification Of Upstream Petroleum Industry Companies list
+          </legend>
+          <input type="checkbox" id="aviation" />
+          <label for="aviation"> Aviation Support Services </label><br />
+
+          <input type="checkbox" id="Calibration" />
+          <label for="Calibration"> Calibration Services</label><br />
+
+          <input type="checkbox" id="data-measure" />
+          <label for="data-measure"> Data Measurement Services</label><br />
+
+          <input type="checkbox" id="diving&hyperbaric" />
+          <label for="diving&Hyperbaric"> Diving and Hyperbaric Services</label
+          ><br />
+
+          <input type="checkbox" id="dredging" />
+          <label for="dredging"> Dredging Services</label><br />
+
+          <input type="checkbox" id="Drilling_production" />
+          <label for="Drilling/production"> Drilling/Production Services</label
+          ><br />
+
+          <input type="checkbox" id="Environmental" />
+          <label for="Environmental"> Environmental Services</label><br />
+
+          <input type="checkbox" id="Exploration" />
+          <label for="Exploration"> Exploration Services</label><br />
+
+          <input type="checkbox" id="Installation&Marine" />
+          <label for="Installation&Marine">
+            Installation Services/ Marine Contracting</label
+          ><br />
+
+          <input type="checkbox" id="Integrated" />
+          <label for="Integrated"> Integrated Services</label><br />
+
+          <input type="checkbox" id="intergrity_test&inspect" />
+          <label for="intergrity_test&inspect">
+            Integrity Test and Inspection Services</label
+          ><br />
+
+          <input type="checkbox" id="Laboratory" />
+          <label for="Laboratory"> Laboratory Services</label><br />
+
+          <input type="checkbox" id="Construction" />
+          <label for="Construction"> Major Construction Services</label><br />
+
+          <input type="checkbox" id="marine_support" />
+          <label for="marine_support"> Marine Support Services</label><br />
+
+          <input type="checkbox" id="Pipeline" />
+          <label for="Pipeline"> Onshore/Offshore Pipeline Services</label
+          ><br />
+
+          <input type="checkbox" id="R&D" />
+          <label for="R&D"> Research and Development Services</label><br />
+
+          <input type="checkbox" id="Rope" />
+          <label for="Rope"> Rope Access</label><br />
+
+          <input type="checkbox" id="specialT" />
+          <label for="specialT"> Special Transportation</label><br />
+
+          <input type="checkbox" id="Surveying/Positioning " />
+          <label for="Surveying/Positioning ">
+            Surveying/Positioning Services</label
+          ><br />
+
+          <input type="checkbox" id="Technical" />
+          <label for="Technical"> Technical Consultancy</label><br />
+
+          <input type="checkbox" id="Waste" />
+          <label for="Waste"> Waste Management Services</label><br />
+        </fieldset>
+
+        <fieldset id="gen-list" class="hidden">
+          <legend>
+            please Indicate <em>exactly </em>two activities from the
+            Classification Of Upstream Petroleum Industry Companies list
+          </legend>
+
+          <input type="checkbox" id="Automobile" />
+          <label for="Automobile"> AutomobileServices </label><br />
+
+          <input type="checkbox" id=" Banking/Financial" />
+          <label for=" Banking/Financial"> Banking/Financial Services</label
+          ><br />
+
+          <input type="checkbox" id="construction-rehab-fabric" />
+          <label for="construction-rehab-fabric">
+            Construction/ Rehabilitation/ Fabrication Works</label
+          ><br />
+
+          <input type="checkbox" id="Equipment/Materialc" />
+          <label for="Equipment/Material">
+            Equipment/ Material Supply Services</label
+          ><br />
+
+          <input type="checkbox" id="Gen-consult" />
+          <label for="Gen-consult"> General Consultancy Services</label><br />
+
+          <input type="checkbox" id="Freight" />
+          <label for="Freight">
+            Haulage/ Freight / Clearing and Forwarding (International/
+            Domestic)</label
+          ><br />
+
+          <input type="checkbox" id="heavy-duty" />
+          <label for="heavy-duty"> Heavy Duty Equipment Supply</label><br />
+
+          <input type="checkbox" id=" Hospital_Medical" />
+          <label for=" Hospital_Medical"> Hospital/ Medical Services</label
+          ><br />
+
+          <input type="checkbox" id="Hospitality" />
+          <label for="Hospitality"> Hospitality Services</label><br />
+
+          <input type="checkbox" id="ICT" />
+          <label for="ICT">
+            Information Technology/ Communication Services</label
+          ><br />
+
+          <input type="checkbox" id="Insurance" />
+          <label for="Insurance"> Insurance Service</label><br />
+
+          <input type="checkbox" id="Manpower " />
+          <label for="Manpower "> Manpower Supply</label><br />
+
+          <input type="checkbox" id="Maintenance" />
+          <label for="Maintenance"> Maintenance</label><br />
+
+          <input type="checkbox" id="Printing" />
+          <label for="Printing"> Printing Services</label><br />
+
+          <input type="checkbox" id="protocol&log" />
+          <label for="protocol&log"> Protocol and Logistics Services</label
+          ><br />
+
+          <input type="checkbox" id="Sanitation" />
+          <label for="Sanitation"> Sanitation</label><br />
+
+          <input type="checkbox" id="Petroleum_Products" />
+          <label for="Petroleum Products"> Supply of Petroleum Products</label
+          ><br />
+
+          <input type="checkbox" id="Supply " />
+          <label for="Supply "> Supply</label><br />
+
+          <input type="checkbox" id="boreholes" />
+          <label for="boreholes"> Water Borehole Services</label><br />
+
+          <input type="checkbox" id="Works" />
+          <label for="Works"> Works</label><br />
+        </fieldset>
+
+        <div>
+          <label for="description" class="label-name"
+            >Provide a description of the range of activities applicant proposes
+            to undertake in relation to above</label
+          >
+          <textarea
+            id="description"
+            placeholder="Enter description here...."
+          ></textarea>
+        </div>
+        <button
+          type="button"
+          class="submit"
+          onclick="submitPermitApplicationForm()"
+        >
+          <!--a href="page2.html"-->
+          Next <i class="fas fa-angle-double-right"></i>
+          <!-- </a> -->
+        </button>
+      </form>
+    </main>
+  </body>
+</html>
